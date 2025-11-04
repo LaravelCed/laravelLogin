@@ -1,0 +1,97 @@
+STEP 1: OPEN TERMINAL THEN CREATE A NEW PROJECT BY TYPING THIS IN TERMINAL
+
+- composer create-project laravel/Laravel client
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 2: THEN OPEN FOLDER 'client' THEN CREATE ALL FILES NEEDED IN THE PROJECT
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 3: OPEN '.env' THEN EDIT THE DATABASE AND CHANGE SESSION=database TO SESSION=file
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 4: OPEN TERMINAL AND THEN CREATE A DATABASE MIGRATION BY TYPING THIS IN TERMINAL AND THEN CONFIGURE IT IN ./database/migration/create_record_table
+
+- php artisan make:migration create_record_table
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 5: OPEN TERMINAL AND THEN CREATE A MODEL BY TYPING THIS IN TERMINAL AND THEN CONFIGURE IT IN ./app/http/model/Record.php
+
+- php artisan make:model Record
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 6: OPEN TERMINAL AND THEN CREATE A CONTROLLER BY TYPING THIS IN TERMINAL AND THEN CONFIGURE IT IN ./app/http/controller/indexController.php
+
+- php artisan make:controller indexController
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 7: MAKE A SERVICES BY CREATING A FOLDER IN DIRECTORY OF ./app/ AND THEN CREATE A FOLDER NAMED 'Services' 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 8: CREATE A FILE INSIDE OF 'Services' FOLDER AND THEN PASTE THIS 
+
+<?php
+
+namespace App\Services;
+
+class indexServices {
+	//
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 9: COPY AND PASTE THIS CODE IN DIRECTORY OF ./config/auth.php
+
+'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Users::class,
+        ],
+    ],
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 10: MAKE THE SAME FORMAT OF MODEL IN YOUR PROJECT
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Users extends Authenticatable
+{
+    use Notifiable;
+    protected $table = 'users';
+    protected $primaryKey = 'user_id';
+    public $timestamps = false;
+    public $incrementing = true;
+    protected $keyType = 'int';
+    protected $fillable = [
+        'user_name',
+        'user_email',
+        'user_pass',
+        'user_type'
+    ];
+    public function getAuthPassword()
+    {
+        return $this->user_pass;
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 11: NOW START THE APPLICATION BY OPEN TERMINAL AND THEN PASTE THIS COMMAND
+
+- php artisan serve
+
+
+
